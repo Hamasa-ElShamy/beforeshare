@@ -40,7 +40,7 @@ def scan(path):
         if "/AcroForm" in root:
             out.append(Finding("pdf.forms", Severity.LOW, "Interactive form fields (values may hold data)", removable=False))
     try:
-        import fitz  # optional: PyMuPDF for text content checks
+        import pymupdf as fitz  # optional: PyMuPDF for text content checks
         with fitz.open(path) as doc:
             text = "\n".join(p.get_text() for p in doc)
         out += scan_text(text, C)
