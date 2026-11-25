@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "beforeshare"
+version = "0.1.0"
+description = "Scan files for hidden data before you share them, then create a verified safe copy."
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+dependencies = ["openpyxl>=3.1", "python-docx>=1.1", "pikepdf>=8", "Pillow>=10"]
+
+[project.optional-dependencies]
+dev = ["pytest", "reportlab"]
+
+[project.scripts]
+beforeshare = "beforeshare.cli:main"
+beforeshare-gui = "beforeshare.gui:main"
+
+[tool.setuptools]
+packages = ["beforeshare"]

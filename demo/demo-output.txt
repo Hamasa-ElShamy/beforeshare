@@ -1,0 +1,28 @@
+$ beforeshare scan demo/Company_Report.xlsx
+BeforeShare Report
+
+File: demo/Company_Report.xlsx
+
+Found:
+
+  [HIGH] 3 hidden row(s)
+  [HIGH] 1 hidden sheet(s): Internal margins
+  [MEDIUM] 1 cell comment(s)
+  [MEDIUM] 7 email address(es) in content  (review manually, cannot be removed automatically)
+  [MEDIUM] Document properties (author: Omar Khaled)
+
+$ beforeshare clean demo/Company_Report.xlsx
+Safe copy written: demo/Company_Report.safe.xlsx
+Original file was not changed.
+Verification: rescanned the copy, the selected items are gone.
+Still present (not selected or not removable):
+  [MEDIUM] 4 email address(es) in content
+
+$ beforeshare scan demo/Company_Report.safe.xlsx
+BeforeShare Report
+
+File: demo/Company_Report.safe.xlsx
+
+Found:
+
+  [MEDIUM] 4 email address(es) in content  (review manually, cannot be removed automatically)
