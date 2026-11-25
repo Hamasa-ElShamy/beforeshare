@@ -51,6 +51,18 @@ Found:
 
 Exit codes: `scan` returns 1 if a HIGH item is found (useful in scripts), 0 otherwise. `clean` returns 2 if verification fails. 3 means the file could not be read.
 
+## Install on Windows, macOS and Linux
+
+Needs Python 3.9 or newer. On Windows install it from python.org and tick "Add python.exe to PATH".
+
+```bash
+# Windows (PowerShell):  py -m pip install git+https://github.com/mohamed-elshamy-ai/beforeshare
+# macOS:                 python3 -m pip install git+https://github.com/mohamed-elshamy-ai/beforeshare
+# Linux:                 python3 -m pip install --user git+https://github.com/mohamed-elshamy-ai/beforeshare
+```
+
+Tested on Linux only. Android: no app; Termux is untested. Technical notes (architecture, algorithms, testing): [ARCHITECTURE.md](ARCHITECTURE.md). Website: https://mohamed-elshamy-ai.github.io/beforeshare/
+
 ## How it works
 
 1. **Detect** the file type by extension.
