@@ -30,7 +30,7 @@ beforeshare scan Company_Report.xlsx          # report only
 beforeshare scan Company_Report.xlsx --json   # for scripts
 beforeshare clean Company_Report.xlsx         # writes Company_Report.safe.xlsx and verifies it
 beforeshare clean file.xlsx --only xlsx.hidden_sheet,xlsx.comments
-beforeshare-gui                               # simple window with checkboxes
+beforeshare-gui                               # simple window with checkboxes (see note below)
 ```
 
 Real output from `demo/Company_Report.xlsx` (see [`demo/demo-output.txt`](demo/demo-output.txt)):
@@ -66,6 +66,7 @@ Exit codes: `scan` returns 1 if a HIGH item is found (useful in scripts), 0 othe
 
 ## Limits (read these)
 
+- The window app (`beforeshare-gui`) has not been tested on a real desktop yet. The command line is what the tests cover.
 - **A safe copy is not a guarantee that a file is safe.** BeforeShare only knows the checks listed above. It can miss things and can flag harmless text.
 - Text rules (emails, phones, cards, IDs, secrets) are pattern matches. They are reported for you to review. They are not removed automatically.
 - Excel: the copy is rewritten with openpyxl. Charts, images and pivot tables may be lost, and formulas pointing at removed rows may change. Check the copy.
