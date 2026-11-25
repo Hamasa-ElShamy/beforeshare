@@ -43,6 +43,11 @@ def scan(path):
         import pymupdf as fitz  # optional: PyMuPDF for text content checks
         with fitz.open(path) as doc:
             text = "\n".join(p.get_text() for p in doc)
+            hidden = _hidden_text(doc)
+        if hidden:
+            out.append(Finding("pdf.hidden_text", Severity.HIGH,
+                               f"Text that is invisible on the page: {hidden.get('white', 0)} white, {hidden.get('tiny', 0)} tiny, {hidden.get('invisible', 0)} invisible-mode span(s). "
+                               "Scanned PDFs with an OCR layer also show up here", removable=False, count=sum(hidden.values())))
         out += scan_text(text, C)
     except ImportError:
         pass
@@ -78,3 +83,25 @@ def clean(src, dst, codes):
             if names is not None and "/JavaScript" in names:
                 del names["/JavaScript"]
         pdf.save(dst)
+
+
+def _hidden_text(doc):
+    """Count text spans a reader cannot see: white text, tiny text (under 2 pt), invisible render mode."""
+    n = {"white": 0, "tiny": 0, "invisible": 0}
+    for page in doc:
+        for block in page.get_text("dict")["blocks"]:
+            for line in block.get("lines", []):
+                for span in line["spans"]:
+                    if not span["text"].strip():
+                        continue
+                    if span["color"] == 0xFFFFFF:
+                        n["white"] += 1
+                    elif span["size"] < 2:
+                        n["tiny"] += 1
+        try:
+            for t in page.get_texttrace():
+                if t.get("type") == 3:
+                    n["invisible"] += 1
+        except Exception:
+            pass
+    return {k: v for k, v in n.items() if v}

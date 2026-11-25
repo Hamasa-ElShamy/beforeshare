@@ -10,7 +10,8 @@ Runs fully offline. No AI model, no cloud: every check is a plain rule you can r
 |---|---|---|
 | Excel `.xlsx` `.xlsm` | hidden sheets (incl. very hidden), hidden rows and columns, cell comments, external links, author metadata | emails, phone numbers, card numbers (Luhn checked), 14-digit national IDs, API keys and passwords in cell text |
 | Word `.docx` | tracked changes (deleted text is still stored), comments, hidden text, author metadata | same text checks |
-| PDF `.pdf` | author/creator metadata, XMP, annotations, embedded attachments, auto-run actions | form fields, same text checks |
+| PDF `.pdf` | author/creator metadata, XMP, annotations, embedded attachments, auto-run actions | white, tiny or invisible-mode text (reported, not removed), form fields, same text checks |
+| PowerPoint `.pptx` | hidden slides, speaker notes, review comments, author metadata | emails, phones, cards, IDs, secrets in slide text |
 | Images `.jpg` `.png` `.tiff` `.webp` | GPS location, capture time, camera or phone model, owner and software tags | none |
 
 ## Install
@@ -21,7 +22,7 @@ cd beforeshare
 pip install -e .
 ```
 
-Python 3.9+. For the window app you also need Tkinter (it ships with Python on Windows and macOS; on Linux install `python3-tk`).
+Python 3.9+. The window needs only a web browser.
 
 ## Use
 
@@ -30,7 +31,7 @@ beforeshare scan Company_Report.xlsx          # report only
 beforeshare scan Company_Report.xlsx --json   # for scripts
 beforeshare clean Company_Report.xlsx         # writes Company_Report.safe.xlsx and verifies it
 beforeshare clean file.xlsx --only xlsx.hidden_sheet,xlsx.comments
-beforeshare-gui                               # simple window with checkboxes (see note below)
+beforeshare-gui                               # opens a window in your browser (local only): drop a file, tick, download
 ```
 
 Real output from `demo/Company_Report.xlsx` (see [`demo/demo-output.txt`](demo/demo-output.txt)):
@@ -63,6 +64,34 @@ Needs Python 3.9 or newer. On Windows install it from python.org and tick "Add p
 
 Tested on Linux only. Android: no app; Termux is untested. Technical notes (architecture, algorithms, testing): [ARCHITECTURE.md](ARCHITECTURE.md). Website: https://mohamed-elshamy-ai.github.io/beforeshare/
 
+## Worked examples
+
+PowerPoint with a hidden pricing slide and speaker notes that say "do not tell the client" ([`demo/Pitch_Deck.pptx`](demo/Pitch_Deck.pptx)):
+
+```
+$ beforeshare scan demo/Pitch_Deck.pptx
+  [HIGH] 1 hidden slide(s): 2
+  [HIGH] Speaker notes on 1 slide(s): 1
+  [MEDIUM] 1 email address(es) in content  (review manually, cannot be removed automatically)
+  [MEDIUM] Document properties (author: Omar Khaled, Steve Canny)
+
+$ beforeshare clean demo/Pitch_Deck.pptx
+Safe copy written: demo/Pitch_Deck.safe.pptx
+Original file was not changed.
+Verification: rescanned the copy, the selected items are gone.
+```
+
+A PDF with white text no reader can see ([`demo/Report_hidden.pdf`](demo/Report_hidden.pdf)):
+
+```
+$ beforeshare scan demo/Report_hidden.pdf
+  [HIGH] Text that is invisible on the page: 1 white, 0 tiny, 0 invisible-mode span(s). ...
+```
+
+The window, after dropping `Company_Report.xlsx` and pressing "Create safe copy":
+
+![window](demo/gui-clean.png)
+
 ## How it works
 
 1. **Detect** the file type by extension.
@@ -78,14 +107,15 @@ Tested on Linux only. Android: no app; Termux is untested. Technical notes (arch
 
 ## Limits (read these)
 
-- The window app (`beforeshare-gui`) has not been tested on a real desktop yet. The command line is what the tests cover.
+- The window (`beforeshare-gui`) is a local web page served on 127.0.0.1 with a random token. It is tested end to end in a real Chrome (`tests/e2e_gui.py`, screenshots in `demo/gui-*.png`), not on every OS and browser.
 - **A safe copy is not a guarantee that a file is safe.** BeforeShare only knows the checks listed above. It can miss things and can flag harmless text.
 - Text rules (emails, phones, cards, IDs, secrets) are pattern matches. They are reported for you to review. They are not removed automatically.
 - Excel: the copy is rewritten with openpyxl. Charts, images and pivot tables may be lost, and formulas pointing at removed rows may change. Check the copy.
 - Word: accepting tracked changes means insertions are kept and deletions removed. Text in text boxes, footnotes and embedded objects is not inspected.
 - PDF: text hidden under other content (for example white text) and removed-by-drawing "redactions" are **not** detected. Metadata and annotations are handled.
 - Images: removal rebuilds the image from its pixels. JPEG is saved again at quality 95, which is lossy. Metadata inside the picture itself (a visible location sign) is not touched.
-- PowerPoint and other formats are not supported yet.
+- PowerPoint: hidden slides, notes, comments and metadata. Images, charts and embedded files inside slides are not inspected. Other formats (.doc, .xls, .ppt, .odt) are not supported.
+- PDF hidden text is detected but not removed (the page has to be recreated). Scanned PDFs that have an OCR layer also trigger it.
 
 ## Development
 
@@ -98,7 +128,7 @@ Tests build their own sample files, run scan and clean on them, and check that t
 
 ## Roadmap
 
-PowerPoint support, PDF hidden-text detection, optional Presidio-based name detection, drag and drop in the window app. None of these exist yet.
+Optional Presidio-based name detection, removal of PDF hidden text, embedded-object inspection. None of these exist yet.
 
 ## License
 

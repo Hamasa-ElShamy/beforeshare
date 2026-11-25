@@ -4,11 +4,13 @@ import tempfile
 from pathlib import Path
 
 from . import xlsx, docx, pdf, image
+from . import pptx as pptx_mod
 from .models import Finding, Severity
 
 _HANDLERS = {
     ".xlsx": xlsx, ".xlsm": xlsx,
     ".docx": docx,
+    ".pptx": pptx_mod,
     ".pdf": pdf,
     ".jpg": image, ".jpeg": image, ".png": image, ".tif": image, ".tiff": image, ".webp": image,
 }

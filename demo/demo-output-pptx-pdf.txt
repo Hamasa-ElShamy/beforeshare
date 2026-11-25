@@ -1,0 +1,28 @@
+$ beforeshare scan demo/Pitch_Deck.pptx
+BeforeShare Report
+
+File: demo/Pitch_Deck.pptx
+
+Found:
+
+  [HIGH] 1 hidden slide(s): 2
+  [HIGH] Speaker notes on 1 slide(s): 1
+  [MEDIUM] 1 email address(es) in content  (review manually, cannot be removed automatically)
+  [MEDIUM] Document properties (author: Omar Khaled, Steve Canny)
+
+$ beforeshare clean demo/Pitch_Deck.pptx
+Safe copy written: demo/Pitch_Deck.safe.pptx
+Original file was not changed.
+Verification: rescanned the copy, the selected items are gone.
+Still present (not selected or not removable):
+  [MEDIUM] 1 email address(es) in content
+
+$ beforeshare scan demo/Report_hidden.pdf
+BeforeShare Report
+
+File: demo/Report_hidden.pdf
+
+Found:
+
+  [HIGH] Text that is invisible on the page: 1 white, 0 tiny, 0 invisible-mode span(s). Scanned PDFs with an OCR layer also show up here  (review manually, cannot be removed automatically)
+  [MEDIUM] Document metadata (author=anonymous; creator=ReportLab PDF Library - www.reportlab.com; producer=ReportLab PDF Library - www.reportlab.com)

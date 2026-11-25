@@ -72,3 +72,31 @@ def jpg_file(tmp_path):
     ex[0x8825] = {1: "N", 2: (30.0, 3.0, 0.0), 3: "E", 4: (31.0, 14.0, 0.0)}
     img.save(p, exif=ex)
     return str(p)
+
+
+@pytest.fixture
+def pptx_file(tmp_path):
+    from pptx import Presentation
+    p = tmp_path / "deck.pptx"
+    prs = Presentation()
+    s1 = prs.slides.add_slide(prs.slide_layouts[1])
+    s1.shapes.title.text = "Public"
+    s1.placeholders[1].text = "Contact sales@example.com"
+    s1.notes_slide.notes_text_frame.text = "Discount floor is 30 percent, do not tell client"
+    s2 = prs.slides.add_slide(prs.slide_layouts[1])
+    s2.shapes.title.text = "Internal pricing"
+    s2._element.set("show", "0")
+    prs.core_properties.author = "Omar Khaled"
+    prs.save(p)
+    return str(p)
+
+
+@pytest.fixture
+def hidden_pdf(tmp_path):
+    p = tmp_path / "hidden.pdf"
+    c = canvas.Canvas(str(p))
+    c.drawString(72, 700, "Visible heading")
+    c.setFillColorRGB(1, 1, 1)
+    c.drawString(72, 650, "secret white text for robots")
+    c.save()
+    return str(p)

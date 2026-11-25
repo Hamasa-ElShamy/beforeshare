@@ -93,3 +93,59 @@ def test_corrupt_file(tmp_path):
     p = tmp_path / "bad.pdf"
     p.write_bytes(b"not a pdf")
     assert main(["scan", str(p)]) == 3
+
+
+def test_pptx(pptx_file):
+    c = codes(scan(pptx_file))
+    assert {"pptx.hidden_slides", "pptx.notes", "pptx.metadata", "pptx.email"} <= c
+    before = sha(pptx_file)
+    out, remaining, ok = scan_and_verify(pptx_file)
+    assert ok and sha(pptx_file) == before
+    from pptx import Presentation
+    prs = Presentation(out)
+    assert len(prs.slides) == 1
+    assert prs.slides[0].notes_slide.notes_text_frame.text == ""
+    assert prs.core_properties.author == ""
+
+
+def test_pdf_hidden_text_detected(hidden_pdf):
+    fs = scan(hidden_pdf)
+    hf = [f for f in fs if f.code == "pdf.hidden_text"]
+    assert hf and not hf[0].removable
+    assert "white" in hf[0].message
+
+
+def test_pdf_visible_text_not_flagged(pdf_file):
+    assert "pdf.hidden_text" not in codes(scan(pdf_file))
+
+
+def _server():
+    import threading
+    from beforeshare.gui import make_server
+    srv = make_server()
+    threading.Thread(target=srv.serve_forever, daemon=True).start()
+    return srv, f"http://127.0.0.1:{srv.server_address[1]}", srv.app.token
+
+
+def test_gui_server_flow(xlsx_file):
+    import urllib.request, urllib.error, json as j
+    srv, base, tok = _server()
+    try:
+        with pytest.raises(urllib.error.HTTPError) as e:
+            urllib.request.urlopen(base + "/?t=wrong")
+        assert e.value.code == 403
+        assert b"BeforeShare" in urllib.request.urlopen(f"{base}/?t={tok}").read()
+        data = open(xlsx_file, "rb").read()
+        r = j.load(urllib.request.urlopen(urllib.request.Request(f"{base}/scan?t={tok}&name=customers.xlsx", data=data, method="POST")))
+        assert any(f["code"] == "xlsx.hidden_sheet" for f in r["findings"])
+        codes_ = [f["code"] for f in r["findings"] if f["removable"]]
+        c = j.load(urllib.request.urlopen(urllib.request.Request(f"{base}/clean?t={tok}&id={r['id']}", data=j.dumps({"codes": codes_}).encode(), method="POST")))
+        assert c["verified"] is True and c["copy_name"] == "customers.safe.xlsx"
+        dl = urllib.request.urlopen(f"{base}/download?t={tok}&id={r['id']}").read()
+        import io, openpyxl
+        assert openpyxl.load_workbook(io.BytesIO(dl)).sheetnames == ["Public"]
+        bad = j.load(urllib.request.urlopen(urllib.request.Request(f"{base}/scan?t={tok}&name=x.pdf", data=b"junk", method="POST")))
+        assert "error" in bad
+    finally:
+        srv.shutdown()
+        srv.app.close()
