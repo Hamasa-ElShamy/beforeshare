@@ -133,3 +133,8 @@ Optional Presidio-based name detection, removal of PDF hidden text, embedded-obj
 ## License
 
 MIT
+
+## Similar tools (honest comparison)
+
+Metadata cleaners such as [mat2](https://github.com/jvoisin/mat2) already exist and are more complete for many file formats. What BeforeShare adds is a before-you-send check that also reports hidden content inside Office files and PDFs (for example hidden text), shows what it found, and produces a verified safe copy by re-scanning it. This is a narrower, checked workflow, not a new idea in metadata removal.
+
