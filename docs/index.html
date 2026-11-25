@@ -1,0 +1,49 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BeforeShare: Your files may reveal more than you think. Check them before you share.</title><meta name="description" content="Scan Excel, Word, PDF and image files for hidden data, create a safe copy, and verify the copy.">
+<meta property="og:title" content="BeforeShare"><meta property="og:description" content="Scan Excel, Word, PDF and image files for hidden data, create a safe copy, and verify the copy.">
+<style>
+:root{--bg:#0f1420;--card:#171e2e;--fg:#e8ecf4;--mut:#9aa6bd;--acc:#5b9dff;--acc2:#7ee0b5}
+*{box-sizing:border-box}body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--fg)}
+.wrap{max-width:880px;margin:0 auto;padding:0 20px}
+header.hero{padding:72px 0 40px;text-align:center;background:radial-gradient(900px 300px at 50% -50px,#24407a55,transparent)}
+h1{font-size:3rem;margin:0 0 8px;letter-spacing:-1px}.tag{color:var(--mut);font-size:1.25rem;margin:0 auto 28px;max-width:640px}
+.btn{display:inline-block;padding:11px 22px;border-radius:9px;background:var(--acc);color:#04122b;font-weight:600;text-decoration:none;margin:4px}
+.btn.alt{background:transparent;color:var(--fg);border:1px solid #34405c}
+section{padding:28px 0}h2{font-size:1.5rem;margin:0 0 14px}
+.card{background:var(--card);border-radius:12px;padding:18px 22px;margin:12px 0}
+pre{background:#0a0e17;border:1px solid #232c44;border-radius:10px;padding:16px;overflow:auto;font-size:.88rem;line-height:1.5}
+code{font-family:ui-monospace,Menlo,Consolas,monospace}
+ul{padding-left:1.2rem}li{margin:6px 0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.mut{color:var(--mut)}.rtl{direction:rtl;text-align:right}img{max-width:100%;border-radius:10px;border:1px solid #232c44}
+footer{padding:40px 0 60px;color:var(--mut);text-align:center;font-size:.9rem}.warn{border-left:4px solid #d68910}
+</style></head><body>
+<header class="hero"><div class="wrap"><h1>BeforeShare</h1><p class="tag">Your files may reveal more than you think. Check them before you share.</p>
+<a class="btn" href="https://github.com/mohamed-elshamy-ai/beforeshare">View on GitHub</a><a class="btn alt" href="#install">Install</a>
+<p class="mut" style="margin-top:18px">Open source &middot; MIT license &middot; runs on your machine</p></div></header>
+<main class="wrap">
+<section><h2>What it does</h2><p>BeforeShare scans a file for hidden sheets, hidden rows, comments, tracked changes, author names, GPS locations and more. You choose what to remove. It writes a new safe copy, then scans the copy again to check the removal worked. Your original is never changed.</p></section>
+<section><div class="grid"><div class="card"><b>Offline</b><div class="mut">No cloud, no AI model. Plain rules you can read.</div></div><div class="card"><b>Verified safe copy</b><div class="mut">The copy is rescanned after cleaning.</div></div><div class="card"><b>4 file families</b><div class="mut">Excel, Word, PDF, images.</div></div><div class="card"><b>Command line and window</b><div class="mut">CLI is tested. The window app is not tested on a desktop yet.</div></div></div></section>
+<section><h2>Example</h2><pre><code>$ beforeshare scan demo/Company_Report.xlsx
+BeforeShare Report
+
+File: demo/Company_Report.xlsx
+
+Found:
+
+  [HIGH] 3 hidden row(s)
+  [HIGH] 1 hidden sheet(s): Internal margins
+  [MEDIUM] 1 cell comment(s)
+  [MEDIUM] 7 email address(es) in content  (review manually, cannot be removed automatically)
+  [MEDIUM] Document properties (author: Omar Khaled)</code></pre></section>
+
+<section id="install"><h2>Install</h2><pre><code>git clone https://github.com/mohamed-elshamy-ai/beforeshare
+cd beforeshare
+pip install -e .
+beforeshare scan yourfile.xlsx
+beforeshare clean yourfile.xlsx</code></pre></section>
+<section><h2>How it works</h2><ol><li>Detect the file type and parse it with a normal library.</li><li>Scan for hidden content and metadata, then run text rules for secrets and personal data.</li><li>Show each finding with a severity.</li><li>Write a safe copy without the items you chose.</li><li>Scan the copy again and report anything still present.</li></ol>
+<div class="card rtl"><b>الشرح بالعربي</b><p>بتفحص الملف قبل ما تبعته وتدورله على حاجات مخفية (شيتات وصفوف مخفية، تعليقات، اسم الكاتب، GPS في الصور). انت بتختار تمسح إيه، والأداة بتعمل نسخة جديدة والأصلي ما بيتغيرش، وبعدين بتفحص النسخة تاني عشان تتأكد إن المسح تم فعلاً. أوفلاين من غير AI.</p></div></section>
+<section><h2>Limits</h2><div class="card warn"><ul><li>A safe copy is not a guarantee. Only the listed checks run.</li><li>Text patterns (emails, cards, IDs, secrets) are reported for you to review, not removed.</li><li>PDF white text and drawn redactions are not detected. PowerPoint is not supported.</li><li>Excel charts and pivot tables may be lost in the copy.</li></ul></div></section>
+</main>
+<footer>Built by <a style="color:var(--acc)" href="https://github.com/mohamed-elshamy-ai">Mohamed Elshamy</a>. Early release (v0.1.0). Issues and pull requests are welcome on <a style="color:var(--acc)" href="https://github.com/mohamed-elshamy-ai/beforeshare">GitHub</a>.</footer>
+</body></html>
