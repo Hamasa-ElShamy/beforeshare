@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en"><head><meta charset="utf-8"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700;800&amp;family=Space+Grotesk:wght@400;500;700&amp;family=IBM+Plex+Sans+Arabic:wght@400;600;700&amp;display=swap" rel="stylesheet"/><meta content="width=device-width,initial-scale=1" name="viewport"/>
+<html lang="en"><head><meta charset="utf-8"/><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23222'/%3E%3C/svg%3E"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700;800&amp;family=Space+Grotesk:wght@400;500;700&amp;family=IBM+Plex+Sans+Arabic:wght@400;600;700&amp;display=swap" rel="stylesheet"/><meta content="width=device-width,initial-scale=1" name="viewport"/>
 <title>BeforeShare: Your files may reveal more than you think. For anyone sending documents, photos or spreadsheets: BeforeShare finds the hidden data inside (author names, GPS locations, hidden sheets, tracked changes) and removes it before you share.</title><meta content="Scan Excel, Word, PDF and image files for hidden data, create a safe copy, and verify the copy." name="description"/>
 <meta content="BeforeShare" property="og:title"/><meta content="Scan Excel, Word, PDF and image files for hidden data, create a safe copy, and verify the copy." property="og:description"/>
 <style>
@@ -82,12 +82,64 @@ html[dir=rtl] .q{font-family:var(--body)}
 .ok b{color:#4fd18b}.no b{color:#ff8f7e}
 html[dir=rtl] #install,html[dir=rtl] #install .card{direction:ltr;text-align:left}
 html[dir=rtl] *{letter-spacing:0!important;text-transform:none!important}
+
+/* redesign: scanner */
+header.hero{background:radial-gradient(700px 360px at 85% 30%,rgba(46,229,157,.14),transparent 70%),var(--bg);border-bottom:1px solid var(--line);padding:56px 0 48px}
+.hero .wrap{max-width:1000px;display:grid;grid-template-columns:1.05fr 1fr;gap:44px;align-items:center}
+.hero h1{font-family:var(--head);font-size:clamp(2rem,6.2vw,3.3rem);line-height:1.08;letter-spacing:-.03em;margin:0 0 16px;text-align:start}
+.hero h1 b{color:var(--acc);font-weight:800}
+.hero .tag{font-size:1.15rem;margin:0 0 22px;color:#a9cdbb;text-align:start;max-width:30rem}
+.eyebrow{font:600 .72rem/1 var(--head);letter-spacing:.18em;text-transform:uppercase;color:var(--acc);margin:0 0 14px}
+.scan{position:relative;border:1px solid var(--acc);background:#050d09;overflow:hidden;box-shadow:0 0 0 1px #000,0 0 40px rgba(46,229,157,.12)}
+.scan .bar{display:flex;justify-content:space-between;padding:8px 12px;border-bottom:1px solid var(--line);font:500 .7rem var(--head);letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+.scan .doc{padding:14px 14px 6px;display:grid;gap:7px;position:relative}
+.rowx{display:grid;grid-template-columns:22px 1fr;gap:10px;align-items:center;font:500 .68rem var(--head);color:var(--mut)}
+.rowx i{display:block;height:11px;background:#14281f;border-radius:2px}
+.rowx.hid i{background:repeating-linear-gradient(45deg,#14281f 0 6px,#0a1711 6px 12px);outline:1px dashed #1d3a2c;transition:background .4s,outline-color .4s}
+.rowx.hid.lit i{background:repeating-linear-gradient(45deg,rgba(229,176,46,.35) 0 6px,rgba(229,176,46,.12) 6px 12px);outline-color:var(--warn)}
+.finds{padding:10px 14px 14px;display:grid;gap:6px;border-top:1px solid var(--line)}
+.find{display:flex;gap:10px;align-items:baseline;font:500 .78rem/1.4 var(--head);opacity:0;transform:translateX(-8px);animation:findin .5s var(--ease-out) forwards}
+.find em{font-style:normal;font-weight:700;font-size:.66rem;letter-spacing:.08em;padding:2px 6px;color:#04150d;background:var(--warn)}
+.find em.m{background:#7fa592}
+.find:nth-child(1){animation-delay:1.1s}.find:nth-child(2){animation-delay:1.9s}.find:nth-child(3){animation-delay:2.7s}.find:nth-child(4){animation-delay:3.4s}
+.beam{position:absolute;inset-inline:0;top:0;height:3px;background:var(--acc);box-shadow:0 0 18px 4px rgba(46,229,157,.55);animation:sweep 3.6s .5s var(--ease-out) forwards;transform:translateY(0)}
+@keyframes sweep{from{transform:translateY(34px)}to{transform:translateY(230px)}}
+@keyframes findin{to{opacity:1;transform:none}}
+.hero .wrap>div:first-child>*{animation:rise var(--dur-s) var(--ease-out) both}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr;gap:30px}}
+@media (prefers-reduced-motion:reduce){.beam{display:none}.find{opacity:1;transform:none}.rowx.hid i{background:repeating-linear-gradient(45deg,rgba(229,176,46,.35) 0 6px,rgba(229,176,46,.12) 6px 12px)}}
+
+/* redesign: scanner */
+header.hero{background:radial-gradient(700px 360px at 85% 30%,rgba(46,229,157,.14),transparent 70%),var(--bg);border-bottom:1px solid var(--line);padding:56px 0 48px}
+.hero .wrap{max-width:1000px;display:grid;grid-template-columns:1.05fr 1fr;gap:44px;align-items:center}
+.hero h1{font-family:var(--head);font-size:clamp(2rem,6.2vw,3.3rem);line-height:1.08;letter-spacing:-.03em;margin:0 0 16px;text-align:start}
+.hero h1 b{color:var(--acc);font-weight:800}
+.hero .tag{font-size:1.15rem;margin:0 0 22px;color:#a9cdbb;text-align:start;max-width:30rem}
+.eyebrow{font:600 .72rem/1 var(--head);letter-spacing:.18em;text-transform:uppercase;color:var(--acc);margin:0 0 14px}
+.scan{position:relative;border:1px solid var(--acc);background:#050d09;overflow:hidden;box-shadow:0 0 0 1px #000,0 0 40px rgba(46,229,157,.12)}
+.scan .bar{display:flex;justify-content:space-between;padding:8px 12px;border-bottom:1px solid var(--line);font:500 .7rem var(--head);letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+.scan .doc{padding:14px 14px 6px;display:grid;gap:7px;position:relative}
+.rowx{display:grid;grid-template-columns:22px 1fr;gap:10px;align-items:center;font:500 .68rem var(--head);color:var(--mut)}
+.rowx i{display:block;height:11px;background:#14281f;border-radius:2px}
+.rowx.hid i{background:repeating-linear-gradient(45deg,#14281f 0 6px,#0a1711 6px 12px);outline:1px dashed #1d3a2c;transition:background .4s,outline-color .4s}
+.rowx.hid.lit i{background:repeating-linear-gradient(45deg,rgba(229,176,46,.35) 0 6px,rgba(229,176,46,.12) 6px 12px);outline-color:var(--warn)}
+.finds{padding:10px 14px 14px;display:grid;gap:6px;border-top:1px solid var(--line)}
+.find{display:flex;gap:10px;align-items:baseline;font:500 .78rem/1.4 var(--head);opacity:0;transform:translateX(-8px);animation:findin .5s var(--ease-out) forwards}
+.find em{font-style:normal;font-weight:700;font-size:.66rem;letter-spacing:.08em;padding:2px 6px;color:#04150d;background:var(--warn)}
+.find em.m{background:#7fa592}
+.find:nth-child(1){animation-delay:1.1s}.find:nth-child(2){animation-delay:1.9s}.find:nth-child(3){animation-delay:2.7s}.find:nth-child(4){animation-delay:3.4s}
+.beam{position:absolute;inset-inline:0;top:0;height:3px;background:var(--acc);box-shadow:0 0 18px 4px rgba(46,229,157,.55);animation:sweep 3.6s .5s var(--ease-out) forwards;transform:translateY(0)}
+@keyframes sweep{from{transform:translateY(34px)}to{transform:translateY(230px)}}
+@keyframes findin{to{opacity:1;transform:none}}
+.hero .wrap>div:first-child>*{animation:rise var(--dur-s) var(--ease-out) both}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr;gap:30px}}
+@media (prefers-reduced-motion:reduce){.beam{display:none}.find{opacity:1;transform:none}.rowx.hid i{background:repeating-linear-gradient(45deg,rgba(229,176,46,.35) 0 6px,rgba(229,176,46,.12) 6px 12px)}}
 </style></head><body>
-<header class="hero"><div class="wrap"><div><p class="eyebrow" data-ar="فحص الملف قبل المشاركة">Pre-share file check</p><h1 data-ar="ملفاتك ممكن تكشف &lt;b&gt;أكتر مما تتخيل.&lt;/b&gt;">Your files may reveal <b>more than you think.</b></h1><p class="tag" data-ar="BeforeShare بتلاقي الصفحات المخفية والتعليقات والتغييرات المتتبَّعة والنص الأبيض وبيانات GPS في الملف قبل ما تبعته، وبتكتب نسخة آمنة وبتفحصها تاني تثبت إن التنضيف اشتغل.">BeforeShare finds hidden sheets, comments, tracked changes, white text and GPS in a file before you send it, writes a safe copy, and scans the copy again to prove it worked.</p>
-<a class="btn" data-ar="شوف الكود على GitHub" href="https://github.com/mohamed-elshamy-ai/beforeshare">View on GitHub</a><a class="btn alt" data-ar="التثبيت" href="#install">Install</a>
-<p class="mut" data-ar="مفتوحة المصدر · رخصة MIT · إصدار تجريبي v0.1.0 · بتشتغل بالكامل على جهازك" style="margin-top:16px">Open source · MIT license · early release v0.1.0 · runs fully offline</p></div>
-<aside aria-label="Example scan of Company_Report.xlsx" class="scan"><div class="bar"><span>scan: Company_Report.xlsx</span><span>demo file</span></div>
-<div class="doc"><div aria-hidden="true" class="beam"></div>
+<header class="hero"><div class="wrap"><div><p class="eyebrow">Pre-share file check</p><h1>Your files may reveal <b>more than you think.</b></h1><p class="tag">BeforeShare finds hidden sheets, comments, tracked changes, white text and GPS in a file before you send it, writes a safe copy, and scans the copy again to prove it worked.</p>
+<a class="btn" href="https://github.com/mohamed-elshamy-ai/beforeshare">View on GitHub</a><a class="btn alt" href="#install">Install</a>
+<p class="mut" style="margin-top:16px">Open source &middot; MIT license &middot; early release v0.1.0 &middot; runs fully offline</p></div>
+<aside class="scan" aria-label="Example scan of Company_Report.xlsx"><div class="bar"><span>scan: Company_Report.xlsx</span><span>demo file</span></div>
+<div class="doc"><div class="beam" aria-hidden="true"></div>
 <div class="rowx"><span>1</span><i style="width:88%"></i></div><div class="rowx"><span>2</span><i style="width:64%"></i></div>
 <div class="rowx hid lit"><span>3</span><i></i></div><div class="rowx hid lit"><span>4</span><i></i></div>
 <div class="rowx"><span>5</span><i style="width:76%"></i></div><div class="rowx hid lit"><span>6</span><i></i></div><div class="rowx"><span>7</span><i style="width:58%"></i></div></div>
