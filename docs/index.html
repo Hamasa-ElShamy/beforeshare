@@ -1,6 +1,8 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700;800&family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>BeforeShare: Your files may reveal more than you think. For anyone sending documents, photos or spreadsheets: BeforeShare finds the hidden data inside (author names, GPS locations, hidden sheets, tracked changes) and removes it before you share.</title><meta name="description" content="Scan Excel, Word, PDF and image files for hidden data, create a safe copy, and verify the copy.">
-<meta property="og:title" content="BeforeShare"><meta property="og:description" content="Scan Excel, Word, PDF and image files for hidden data, create a safe copy, and verify the copy.">
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700;800&amp;family=Space+Grotesk:wght@400;500;700&amp;family=IBM+Plex+Sans+Arabic:wght@400;600;700&amp;display=swap" rel="stylesheet"/><meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>BeforeShare: Your files may reveal more than you think. For anyone sending documents, photos or spreadsheets: BeforeShare finds the hidden data inside (author names, GPS locations, hidden sheets, tracked changes) and removes it before you share.</title><meta content="Scan Excel, Word, PDF and image files for hidden data, create a safe copy, and verify the copy." name="description"/>
+<meta content="BeforeShare" property="og:title"/><meta content="Scan Excel, Word, PDF and image files for hidden data, create a safe copy, and verify the copy." property="og:description"/>
 <style>
 *{box-sizing:border-box}html{scroll-behavior:smooth}
 body{margin:0;font:16px/1.65 var(--body);background:var(--bg);color:var(--fg)}
@@ -71,21 +73,29 @@ header.hero{background:radial-gradient(700px 360px at 85% 30%,rgba(46,229,157,.1
 .hero .wrap>div:first-child>*{animation:rise var(--dur-s) var(--ease-out) both}
 @media (max-width:860px){.hero .wrap{grid-template-columns:1fr;gap:30px}}
 @media (prefers-reduced-motion:reduce){.beam{display:none}.find{opacity:1;transform:none}.rowx.hid i{background:repeating-linear-gradient(45deg,rgba(229,176,46,.35) 0 6px,rgba(229,176,46,.12) 6px 12px)}}
+
+/* qa round 1: tokens for status colors, touch targets, RTL demo panels */
+footer a{display:inline-block;padding:14px 4px;min-height:44px;box-sizing:border-box}
+pre,code,.err,.q,.finder,.results,.redcard,.scan,.stack,.proof,.os pre{direction:ltr;text-align:left;unicode-bidi:isolate}
+pre,code,.err,.q{font-family:ui-monospace,Menlo,Consolas,monospace}
+html[dir=rtl] .q{font-family:var(--body)}
+.ok b{color:#4fd18b}.no b{color:#ff8f7e}
+html[dir=rtl] #install,html[dir=rtl] #install .card{direction:ltr;text-align:left}
+html[dir=rtl] *{letter-spacing:0!important;text-transform:none!important}
 </style></head><body>
-<header class="hero"><div class="wrap"><div><p class="eyebrow">Pre-share file check</p><h1>Your files may reveal <b>more than you think.</b></h1><p class="tag">BeforeShare finds hidden sheets, comments, tracked changes, white text and GPS in a file before you send it, writes a safe copy, and scans the copy again to prove it worked.</p>
-<a class="btn" href="https://github.com/mohamed-elshamy-ai/beforeshare">View on GitHub</a><a class="btn alt" href="#install">Install</a>
-<p class="mut" style="margin-top:16px">Open source &middot; MIT license &middot; early release v0.1.0 &middot; runs fully offline</p></div>
-<aside class="scan" aria-label="Example scan of Company_Report.xlsx"><div class="bar"><span>scan: Company_Report.xlsx</span><span>demo file</span></div>
-<div class="doc"><div class="beam" aria-hidden="true"></div>
+<header class="hero"><div class="wrap"><div><p class="eyebrow" data-ar="فحص الملف قبل المشاركة">Pre-share file check</p><h1 data-ar="ملفاتك ممكن تكشف &lt;b&gt;أكتر مما تتخيل.&lt;/b&gt;">Your files may reveal <b>more than you think.</b></h1><p class="tag" data-ar="BeforeShare بتلاقي الصفحات المخفية والتعليقات والتغييرات المتتبَّعة والنص الأبيض وبيانات GPS في الملف قبل ما تبعته، وبتكتب نسخة آمنة وبتفحصها تاني تثبت إن التنضيف اشتغل.">BeforeShare finds hidden sheets, comments, tracked changes, white text and GPS in a file before you send it, writes a safe copy, and scans the copy again to prove it worked.</p>
+<a class="btn" data-ar="شوف الكود على GitHub" href="https://github.com/mohamed-elshamy-ai/beforeshare">View on GitHub</a><a class="btn alt" data-ar="التثبيت" href="#install">Install</a>
+<p class="mut" data-ar="مفتوحة المصدر · رخصة MIT · إصدار تجريبي v0.1.0 · بتشتغل بالكامل على جهازك" style="margin-top:16px">Open source · MIT license · early release v0.1.0 · runs fully offline</p></div>
+<aside aria-label="Example scan of Company_Report.xlsx" class="scan"><div class="bar"><span>scan: Company_Report.xlsx</span><span>demo file</span></div>
+<div class="doc"><div aria-hidden="true" class="beam"></div>
 <div class="rowx"><span>1</span><i style="width:88%"></i></div><div class="rowx"><span>2</span><i style="width:64%"></i></div>
 <div class="rowx hid lit"><span>3</span><i></i></div><div class="rowx hid lit"><span>4</span><i></i></div>
 <div class="rowx"><span>5</span><i style="width:76%"></i></div><div class="rowx hid lit"><span>6</span><i></i></div><div class="rowx"><span>7</span><i style="width:58%"></i></div></div>
 <div class="finds"><div class="find"><em>HIGH</em>3 hidden rows</div><div class="find"><em>HIGH</em>1 hidden sheet: Internal margins</div><div class="find"><em class="m">MEDIUM</em>1 cell comment</div><div class="find"><em class="m">MEDIUM</em>Document properties (author: Omar Khaled)</div></div></aside></div></header>
 <main class="wrap">
-<section><div class="grid"><div class="card"><b>Offline</b><div class="mut">No cloud, no AI model. Plain rules you can read.</div></div><div class="card"><b>Verified safe copy</b><div class="mut">The copy is rescanned after cleaning.</div></div><div class="card"><b>Excel, Word, PowerPoint, PDF, images</b><div class="mut">Hidden slides and notes, white text in PDFs, GPS in photos.</div></div><div class="card"><b>A real window</b><div class="mut">Local browser window, tested in real Chrome. Also a CLI.</div></div></div></section>
-<section><h2>What it does</h2><p>BeforeShare scans a file for hidden sheets, hidden rows, comments, tracked changes, hidden slides, speaker notes, white text in PDFs, author names, GPS locations and more. You choose what to remove. It writes a new safe copy, then scans the copy again to check the removal worked. Your original is never changed.</p></section>
-
-<section><h2>Examples</h2><h3>Excel: hidden rows and sheets, a comment, author name</h3><pre><code>$ beforeshare scan demo/Company_Report.xlsx
+<section><div class="grid"><div class="card"><b data-ar="من غير إنترنت">Offline</b><div class="mut" data-ar="من غير سحابة ومن غير نموذج ذكاء اصطناعي. قواعد بسيطة تقدر تقراها.">No cloud, no AI model. Plain rules you can read.</div></div><div class="card"><b data-ar="نسخة آمنة متأكَّد منها">Verified safe copy</b><div class="mut" data-ar="النسخة بتتفحص تاني بعد التنضيف.">The copy is rescanned after cleaning.</div></div><div class="card"><b data-ar="Excel وWord وPowerPoint وPDF وصور">Excel, Word, PowerPoint, PDF, images</b><div class="mut" data-ar="شرائح وملاحظات مخفية، نص أبيض في PDF، وموقع GPS في الصور.">Hidden slides and notes, white text in PDFs, GPS in photos.</div></div><div class="card"><b data-ar="نافذة حقيقية">A real window</b><div class="mut" data-ar="نافذة متصفح على جهازك، متجرَّبة في Chrome حقيقي. وفيها كمان سطر أوامر.">Local browser window, tested in real Chrome. Also a CLI.</div></div></div></section>
+<section><h2 data-ar="بتعمل إيه">What it does</h2><p data-ar="BeforeShare بتفحص الملف وتدوّر على صفحات وصفوف مخفية وتعليقات وتغييرات متتبَّعة وشرائح مخفية وملاحظات متحدث ونص أبيض في PDF وأسماء مؤلفين وأماكن GPS وغيرها. إنت اللي بتختار إيه اللي يتشال. بتكتب نسخة جديدة آمنة وبتفحصها تاني تتأكد إن الشيل نجح. الأصل عمره ما بيتغيّر.">BeforeShare scans a file for hidden sheets, hidden rows, comments, tracked changes, hidden slides, speaker notes, white text in PDFs, author names, GPS locations and more. You choose what to remove. It writes a new safe copy, then scans the copy again to check the removal worked. Your original is never changed.</p></section>
+<section><h2 data-ar="أمثلة">Examples</h2><h3 data-ar="Excel: صفوف وصفحات مخفية وتعليق واسم المؤلف">Excel: hidden rows and sheets, a comment, author name</h3><pre><code>$ beforeshare scan demo/Company_Report.xlsx
 BeforeShare Report
 
 File: demo/Company_Report.xlsx
@@ -96,7 +106,7 @@ Found:
   [HIGH] 1 hidden sheet(s): Internal margins
   [MEDIUM] 1 cell comment(s)
   [MEDIUM] 7 email address(es) in content  (review manually, cannot be removed automatically)
-  [MEDIUM] Document properties (author: Omar Khaled)</code></pre><h3>PowerPoint and PDF</h3><pre><code>$ beforeshare scan demo/Pitch_Deck.pptx
+  [MEDIUM] Document properties (author: Omar Khaled)</code></pre><h3 data-ar="PowerPoint وPDF">PowerPoint and PDF</h3><pre><code>$ beforeshare scan demo/Pitch_Deck.pptx
 BeforeShare Report
 
 File: demo/Pitch_Deck.pptx
@@ -123,8 +133,7 @@ File: demo/Report_hidden.pdf
 Found:
 
   [HIGH] Text that is invisible on the page: 1 white, 0 tiny, 0 invisible-mode span(s). Scanned PDFs with an OCR layer also show up here  (review manually, cannot be removed automatically)
-  [MEDIUM] Document metadata (author=anonymous; creator=ReportLab PDF Library - www.reportlab.com; producer=ReportLab PDF Library - www.reportlab.com)</code></pre><img class="shot" src="gui-clean.png" alt="BeforeShare example output"></section>
-
+  [MEDIUM] Document metadata (author=anonymous; creator=ReportLab PDF Library - www.reportlab.com; producer=ReportLab PDF Library - www.reportlab.com)</code></pre><img alt="BeforeShare example output" class="shot" src="gui-clean.png"/></section>
 <section id="install"><h2>Install</h2><div class="os">
 <div class="card"><h3>Windows</h3><div class="mut">Install Python 3.9+ from python.org (tick "Add python.exe to PATH"), then in PowerShell:</div>
 <pre><code>py -m pip install git+https://github.com/mohamed-elshamy-ai/beforeshare
@@ -140,9 +149,9 @@ beforeshare scan yourfile.xlsx
 beforeshare-gui</code></pre><div><span class="ok"><b>Tested.</b></span> Tested on Linux (Python 3.10). The window is tested in Chrome.</div></div>
 <div class="card"><h3>Android</h3><div><span class="mut"><b>Untested.</b></span> No app. Termux (python from pkg) might work for the command line but Pillow/pikepdf may need compiling. Not tested.</div></div>
 </div></section>
-<section class="how-section"><h2><span class="lang-en">How it works</span><span class="lang-ar" hidden>إزاي بيشتغل</span></h2><div class="langtoggle" role="group" aria-label="Language / اللغة"><button type="button" data-lang="en" aria-pressed="true">English</button><button type="button" data-lang="ar" aria-pressed="false">العربية</button></div><div class="lang-en"><ol><li>Detect the file type and parse it with a normal library.</li><li>Scan for hidden content and metadata, then run text rules for secrets and personal data.</li><li>Show each finding with a severity.</li><li>Write a safe copy without the items you chose.</li><li>Scan the copy again and report anything still present.</li></ol>
+<section class="how-section"><h2><span class="lang-en">How it works</span><span class="lang-ar" hidden="">إزاي بيشتغل</span></h2><div aria-label="Language / اللغة" class="langtoggle" role="group"><button aria-pressed="true" data-lang="en" type="button">English</button><button aria-pressed="false" data-lang="ar" type="button">العربية</button></div><div class="lang-en"><ol><li>Detect the file type and parse it with a normal library.</li><li>Scan for hidden content and metadata, then run text rules for secrets and personal data.</li><li>Show each finding with a severity.</li><li>Write a safe copy without the items you chose.</li><li>Scan the copy again and report anything still present.</li></ol>
 </div><div class="card lang-ar" dir="rtl" lang="ar" style="text-align:start"><b>الشرح بالعربي</b><p>بتفحص الملف قبل ما تبعته وتدورله على حاجات مخفية (شيتات وصفوف مخفية، تعليقات، اسم الكاتب، GPS في الصور). انت بتختار تمسح إيه، والأداة بتعمل نسخة جديدة والأصلي ما بيتغيرش، وبعدين بتفحص النسخة تاني عشان تتأكد إن المسح تم فعلاً. أوفلاين من غير AI.</p></div></section>
-<section><h2>Honest limits</h2><div class="card warn"><ul><li>A safe copy is not a guarantee. Only the listed checks run.</li><li>Text patterns (emails, cards, IDs, secrets) are reported for you to review, not removed.</li><li>PDF hidden text is detected but not removed. Scanned PDFs with an OCR layer also trigger it.</li><li>Excel charts and pivot tables may be lost in the copy. PowerPoint images and charts are not inspected.</li><li>The window is tested in Chrome on Linux; other browsers and systems are untested.</li></ul></div></section>
+<section><h2 data-ar="حدودها بصراحة">Honest limits</h2><div class="card warn"><ul><li data-ar="النسخة الآمنة مش ضمان. بتشتغل الفحوصات المذكورة بس.">A safe copy is not a guarantee. Only the listed checks run.</li><li data-ar="أنماط النص (إيميلات وكروت وأرقام هوية وأسرار) بتتبلّغ علشان تراجعها، ومش بتتشال.">Text patterns (emails, cards, IDs, secrets) are reported for you to review, not removed.</li><li data-ar="النص المخفي في PDF بيتكشف ومش بيتشال. وPDF الممسوح اللي فيه طبقة OCR بيفعّل التنبيه برضه.">PDF hidden text is detected but not removed. Scanned PDFs with an OCR layer also trigger it.</li><li data-ar="رسوم Excel والجداول المحورية ممكن تضيع في النسخة. صور PowerPoint ورسومه مش بتتفحص.">Excel charts and pivot tables may be lost in the copy. PowerPoint images and charts are not inspected.</li><li data-ar="النافذة متجرَّبة في Chrome على Linux؛ المتصفحات والأنظمة التانية لسه متجرّبتش.">The window is tested in Chrome on Linux; other browsers and systems are untested.</li></ul></div></section>
 </main>
 <footer>Built by <a href="https://github.com/mohamed-elshamy-ai">Mohamed Elshamy</a>. Issues and pull requests are welcome on <a href="https://github.com/mohamed-elshamy-ai/beforeshare">GitHub</a>.</footer>
 <script>
@@ -153,6 +162,8 @@ beforeshare-gui</code></pre><div><span class="ok"><b>Tested.</b></span> Tested o
   document.querySelectorAll('.lang-ar').forEach(function(e){e.hidden=lang!=='ar'});
   document.querySelectorAll('.langtoggle button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===lang?'true':'false')});
   document.querySelectorAll('.how-section').forEach(function(s){s.dir=lang==='ar'?'rtl':'ltr'});
+  document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+  document.querySelectorAll('[data-ar]').forEach(function(e){if(e.dataset.en===undefined)e.dataset.en=e.innerHTML;e.innerHTML=lang==='ar'?e.dataset.ar:e.dataset.en});
   try{localStorage.setItem(KEY,lang)}catch(e){}
  }
  var def=(navigator.language||'en').toLowerCase().indexOf('ar')===0?'ar':'en';
