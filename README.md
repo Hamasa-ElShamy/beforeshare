@@ -103,11 +103,7 @@ The window, after dropping `Company_Report.xlsx` and pressing "Create safe copy"
 5. **Safe copy**: write a new file without the items you selected. The original stays untouched.
 6. **Verify**: scan the new file again. If anything you asked to remove is still there, the command says so and exits with code 2.
 
-### الشرح بالعربي
-
-الأداة بتفحص الملف قبل ما تبعته لحد: بتدور على حاجات مخفية جواه (شيتات مخفية في Excel، صفوف وأعمدة مخفية، تعليقات، تعديلات متتبعة في Word، اسم الكاتب، مواقع GPS في الصور، مرفقات داخل PDF). بتعرضلك كل حاجة بدرجة خطورة، وانت بتختار تمسح إيه، والأداة بتعمل **نسخة جديدة** (الأصلي ما بيتغيرش) وبعدين **بتفحص النسخة تاني** عشان تتأكد إن اللي اخترت تمسحه اتمسح فعلاً. بتشتغل أوفلاين تماماً وبقواعد واضحة، من غير أي AI.
-
-## Limits (read these)
+## Limitations
 
 - The window (`beforeshare-gui`) is a local web page served on 127.0.0.1 with a random token. It is tested end to end in a real Chrome (`tests/e2e_gui.py`, screenshots in `demo/gui-*.png`), not on every OS and browser.
 - **A safe copy is not a guarantee that a file is safe.** BeforeShare only knows the checks listed above. It can miss things and can flag harmless text.
@@ -137,7 +133,6 @@ Optional Presidio-based name detection, removal of PDF hidden text, embedded-obj
 
 MIT
 
-## Similar tools (honest comparison)
+## Related tools
 
 Metadata cleaners such as [mat2](https://github.com/jvoisin/mat2) already exist and are more complete for many file formats. What BeforeShare adds is a before-you-send check that also reports hidden content inside Office files and PDFs (for example hidden text), shows what it found, and produces a verified safe copy by re-scanning it. This is a narrower, checked workflow, not a new idea in metadata removal.
-

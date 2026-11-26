@@ -1,6 +1,4 @@
-# BeforeShare: technical notes / الشرح التقني
-
-## English
+# BeforeShare: technical notes
 
 **Modules**
 - `models.py`: `Finding(code, severity, message, removable, count)` and `Severity`.
@@ -13,7 +11,7 @@
 1. `scan`: parse with a normal library, collect structural findings (hidden sheets, rows, columns, comments, tracked changes, hidden text, hidden slides, notes, annotations, attachments, EXIF GPS, metadata), then run text detectors over the visible content.
 2. `clean`: write to a new file. Only the finding codes you pick are removed. The original is never opened for writing, and writing over it is refused.
 3. Verification: rescan the copy. Any selected, removable code still present is reported and the CLI exits with code 2.
-4. Word cleaning edits the XML: tracked changes are accepted (insertions kept, deletions dropped), comment ranges and the comments part are removed. Images are rebuilt from pixels, which drops all metadata at once. PDF is rewritten with pikepdf after removing info, XMP, annotations, attachments and auto-run actions. PDF hidden text is found with PyMuPDF (white color, size under 2 pt, invisible render mode).
+4. Word cleaning edits the XML: tracked changes are accepted (insertions kept, deletions dropped), comment ranges and the comments part are removed. Images are rebuilt from pixels, which drops all metadata at once. PDF is rewritten with pikepdf after removing info, XMP, annotations, attachments and auto-run actions. PDF hidden text is found with the optional PyMuPDF extra (white color, size under 2 pt, invisible render mode).
 
 **Design decisions**
 - Rules not AI, so every finding is explainable and works offline.
@@ -24,13 +22,3 @@
 **Testing** (15 pytest tests plus a real-browser end-to-end script): all five formats scanned and cleaned, originals byte-identical, refusal to overwrite, corrupt and unsupported files, the detectors, the web window's token check, scan, clean and download flow, and `tests/e2e_gui.py` driving real Chrome.
 
 **Limits**: see the README (a safe copy is not a guarantee, text patterns are heuristic, PDF hidden text is not removed, Excel charts may be lost).
-
-## بالعربي
-
-**الأجزاء**: ملف لكل صيغة (Excel وWord وPowerPoint وPDF والصور) فيه `scan` و`clean`. `detectors.py` للكشف عن الأسرار وأرقام البطاقات (بفحص Luhn) والرقم القومي (١٤ رقم) والإيميلات والتليفونات. `core.py` للتوزيع وإنشاء النسخة والتحقق. `gui.py` نافذة محلية على صفحة ويب بتشتغل على 127.0.0.1 بس وبـ token عشوائي.
-
-**الخوارزمية**: (١) الفحص: قراءة الملف بمكتبة عادية وتجميع الحاجات المخفية (شيتات وصفوف وتعليقات وتعديلات متتبعة وشرائح مخفية وملاحظات المتحدث وGPS وبيانات الكاتب) وبعدين قواعد على النص الظاهر. (٢) التنظيف: بيكتب ملف جديد بالحاجات اللي اخترتها بس، والأصلي مبيتفتحش للكتابة. (٣) التحقق: بيفحص النسخة تاني، ولو فيه حاجة اخترت تمسحها لسه موجودة بيرجع كود خطأ ٢. (٤) النص الأبيض أو الصغير جداً في PDF بيتكشف بـ PyMuPDF.
-
-**قرارات التصميم**: قواعد مش AI عشان كل نتيجة تتفسر وتشتغل أوفلاين. التحقق هو الميزة الأساسية، وفعلاً اكتشف مشكلة حقيقية في الاختبار. الإيميلات والأرقام الحساسة بتتعرض بس ومش بتتمسح تلقائي. النافذة صفحة ويب محلية عشان تتختبر في متصفح حقيقي.
-
-**الاختبار**: ١٥ اختبار pytest وسكريبت end-to-end بيشغل Chrome حقيقي. **الحدود**: في الـ README.
