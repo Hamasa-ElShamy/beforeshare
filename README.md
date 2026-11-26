@@ -114,10 +114,11 @@ The window, after dropping `Company_Report.xlsx` and pressing "Create safe copy"
 - Text rules (emails, phones, cards, IDs, secrets) are pattern matches. They are reported for you to review. They are not removed automatically.
 - Excel: the copy is rewritten with openpyxl. Charts, images and pivot tables may be lost, and formulas pointing at removed rows may change. Check the copy.
 - Word: accepting tracked changes means insertions are kept and deletions removed. Text in text boxes, footnotes and embedded objects is not inspected.
-- PDF: text hidden under other content (for example white text) and removed-by-drawing "redactions" are **not** detected. Metadata and annotations are handled.
+- PDF: removed-by-drawing "redactions" are **not** detected. White or tiny hidden text is only detected with the optional `deeppdf` extra. Metadata and annotations are handled.
 - Images: removal rebuilds the image from its pixels. JPEG is saved again at quality 95, which is lossy. Metadata inside the picture itself (a visible location sign) is not touched.
 - PowerPoint: hidden slides, notes, comments and metadata. Images, charts and embedded files inside slides are not inspected. Other formats (.doc, .xls, .ppt, .odt) are not supported.
 - PDF hidden text is detected but not removed (the page has to be recreated). Scanned PDFs that have an OCR layer also trigger it.
+- **PyMuPDF is optional.** The PDF hidden-text check and the PDF body-text rules need PyMuPDF, which is AGPL-3.0, so BeforeShare does not install it by default. Without it, PDF metadata, annotations, attachments and auto-run actions are still checked. To turn the deep check on: `pip install "beforeshare[deeppdf]"` (you accept PyMuPDF's AGPL terms for your own copy).
 
 ## Development
 
