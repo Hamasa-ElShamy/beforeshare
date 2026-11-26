@@ -40,6 +40,11 @@ h1{font-family:var(--head);font-size:clamp(2rem,8vw,2.8rem);overflow-wrap:break-
 .card{transition:border-color .25s var(--ease-out),transform .25s var(--ease-out)}
 .card:hover{border-color:var(--acc);transform:translateY(-2px)}
 @media (prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+
+/* language toggle */
+.langtoggle{display:inline-flex;gap:4px;margin:0 0 14px;background:var(--card);border:1px solid var(--line);border-radius:99px;padding:4px}
+.langtoggle button{border:0;background:transparent;color:var(--mut);font:inherit;font-weight:600;min-height:44px;padding:8px 20px;border-radius:99px;cursor:pointer;transition:background .2s var(--ease-out),color .2s var(--ease-out)}
+.langtoggle button[aria-pressed="true"]{background:var(--acc);color:var(--accfg)}
 </style></head><body>
 <header class="hero"><div class="wrap"><h1>BeforeShare</h1><p class="tag">Your files may reveal more than you think. Check them before you share.</p>
 <a class="btn" href="https://github.com/mohamed-elshamy-ai/beforeshare">View on GitHub</a><a class="btn alt" href="#install">Install</a>
@@ -103,9 +108,24 @@ beforeshare scan yourfile.xlsx
 beforeshare-gui</code></pre><div><span class="ok"><b>Tested.</b></span> Tested on Linux (Python 3.10). The window is tested in Chrome.</div></div>
 <div class="card"><h3>Android</h3><div><span class="mut"><b>Untested.</b></span> No app. Termux (python from pkg) might work for the command line but Pillow/pikepdf may need compiling. Not tested.</div></div>
 </div></section>
-<section><h2>How it works</h2><ol><li>Detect the file type and parse it with a normal library.</li><li>Scan for hidden content and metadata, then run text rules for secrets and personal data.</li><li>Show each finding with a severity.</li><li>Write a safe copy without the items you chose.</li><li>Scan the copy again and report anything still present.</li></ol>
-<div class="card" dir="rtl" lang="ar" style="text-align:start"><b>الشرح بالعربي</b><p>بتفحص الملف قبل ما تبعته وتدورله على حاجات مخفية (شيتات وصفوف مخفية، تعليقات، اسم الكاتب، GPS في الصور). انت بتختار تمسح إيه، والأداة بتعمل نسخة جديدة والأصلي ما بيتغيرش، وبعدين بتفحص النسخة تاني عشان تتأكد إن المسح تم فعلاً. أوفلاين من غير AI.</p></div></section>
+<section class="how-section"><h2><span class="lang-en">How it works</span><span class="lang-ar" hidden>إزاي بيشتغل</span></h2><div class="langtoggle" role="group" aria-label="Language / اللغة"><button type="button" data-lang="en" aria-pressed="true">English</button><button type="button" data-lang="ar" aria-pressed="false">العربية</button></div><div class="lang-en"><ol><li>Detect the file type and parse it with a normal library.</li><li>Scan for hidden content and metadata, then run text rules for secrets and personal data.</li><li>Show each finding with a severity.</li><li>Write a safe copy without the items you chose.</li><li>Scan the copy again and report anything still present.</li></ol>
+</div><div class="card lang-ar" dir="rtl" lang="ar" style="text-align:start"><b>الشرح بالعربي</b><p>بتفحص الملف قبل ما تبعته وتدورله على حاجات مخفية (شيتات وصفوف مخفية، تعليقات، اسم الكاتب، GPS في الصور). انت بتختار تمسح إيه، والأداة بتعمل نسخة جديدة والأصلي ما بيتغيرش، وبعدين بتفحص النسخة تاني عشان تتأكد إن المسح تم فعلاً. أوفلاين من غير AI.</p></div></section>
 <section><h2>Honest limits</h2><div class="card warn"><ul><li>A safe copy is not a guarantee. Only the listed checks run.</li><li>Text patterns (emails, cards, IDs, secrets) are reported for you to review, not removed.</li><li>PDF hidden text is detected but not removed. Scanned PDFs with an OCR layer also trigger it.</li><li>Excel charts and pivot tables may be lost in the copy. PowerPoint images and charts are not inspected.</li><li>The window is tested in Chrome on Linux; other browsers and systems are untested.</li></ul></div></section>
 </main>
 <footer>Built by <a href="https://github.com/mohamed-elshamy-ai">Mohamed Elshamy</a>. Issues and pull requests are welcome on <a href="https://github.com/mohamed-elshamy-ai/beforeshare">GitHub</a>.</footer>
-</body></html>
+<script>
+(function(){
+ var KEY='site-lang';
+ function apply(lang){
+  document.querySelectorAll('.lang-en').forEach(function(e){e.hidden=lang!=='en'});
+  document.querySelectorAll('.lang-ar').forEach(function(e){e.hidden=lang!=='ar'});
+  document.querySelectorAll('.langtoggle button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===lang?'true':'false')});
+  document.querySelectorAll('.how-section').forEach(function(s){s.dir=lang==='ar'?'rtl':'ltr'});
+  try{localStorage.setItem(KEY,lang)}catch(e){}
+ }
+ var def=(navigator.language||'en').toLowerCase().indexOf('ar')===0?'ar':'en';
+ var saved=null; try{saved=localStorage.getItem(KEY)}catch(e){}
+ apply(saved||def);
+ document.querySelectorAll('.langtoggle button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+})();
+</script></body></html>
