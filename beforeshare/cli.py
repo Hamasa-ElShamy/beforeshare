@@ -56,7 +56,11 @@ def main(argv=None):
         print(f"error: {e}", file=sys.stderr)
         return 3
     except Exception as e:  # corrupt or unreadable file
-        print(f"error: could not process file ({type(e).__name__}: {e})", file=sys.stderr)
+        import os
+        try: empty = os.path.getsize(a.file) == 0
+        except OSError: empty = False
+        if empty: print(f"error: the file is empty: {a.file}", file=sys.stderr)
+        else: print(f"error: could not read '{a.file}'. It may be damaged, password protected, or not the type its extension says ({type(e).__name__}: {e})", file=sys.stderr)
         return 3
 
 

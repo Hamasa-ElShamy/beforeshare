@@ -149,3 +149,18 @@ def test_gui_server_flow(xlsx_file):
     finally:
         srv.shutdown()
         srv.app.close()
+
+
+def test_pdf_open_at_page_is_not_flagged(tmp_path):
+    import pikepdf
+    from beforeshare import scan
+    p = tmp_path / "a.pdf"; pdf = pikepdf.new(); pdf.add_blank_page()
+    pdf.Root.OpenAction = pikepdf.Array([pdf.pages[0].obj, pikepdf.Name.Fit]); pdf.save(str(p))
+    assert not [f for f in scan(str(p)) if f.code == "pdf.javascript"]
+
+
+def test_empty_file_clean_error(tmp_path):
+    import subprocess, sys
+    e = tmp_path / "e.docx"; e.write_bytes(b"")
+    r = subprocess.run([sys.executable, "-m", "beforeshare.cli", "scan", str(e)], capture_output=True, text=True)
+    assert r.returncode != 0 and "empty" in r.stderr and "Traceback" not in r.stderr

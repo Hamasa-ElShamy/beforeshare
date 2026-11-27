@@ -35,7 +35,15 @@ def scan(path):
         if n:
             out.append(Finding("pdf.attachments", Severity.HIGH, f"{n} embedded file attachment(s)", count=n))
         root = pdf.Root
-        if "/JavaScript" in str(root.get("/Names", "")) or "/OpenAction" in root:
+        def _risky_open():
+            oa = root.get("/OpenAction")
+            if oa is None: return False
+            try:
+                if isinstance(oa, pikepdf.Array): return False      # "open at this page / zoom": harmless
+                return str(oa.get("/S", "")) in ("/JavaScript", "/Launch", "/URI", "/SubmitForm", "/ImportData", "/GoToR", "/GoToE", "/Rendition")
+            except Exception:
+                return True
+        if "/JavaScript" in str(root.get("/Names", "")) or _risky_open():
             out.append(Finding("pdf.javascript", Severity.MEDIUM, "Document has auto-run actions or JavaScript", count=1))
         if "/AcroForm" in root:
             out.append(Finding("pdf.forms", Severity.LOW, "Interactive form fields (values may hold data)", removable=False))
