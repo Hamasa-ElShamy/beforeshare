@@ -1,6 +1,6 @@
 # BeforeShare
 
-[![tests](https://github.com/mohamed-elshamy-ai/beforeshare/actions/workflows/tests.yml/badge.svg)](https://github.com/mohamed-elshamy-ai/beforeshare/actions/workflows/tests.yml) ![tests: 17 passing](https://img.shields.io/badge/tests-17%20passing-brightgreen) ![license: MIT](https://img.shields.io/badge/license-MIT-blue)
+[![tests](https://github.com/Hamasa-ElShamy/beforeshare/actions/workflows/tests.yml/badge.svg)](https://github.com/Hamasa-ElShamy/beforeshare/actions/workflows/tests.yml) ![tests: 17 passing](https://img.shields.io/badge/tests-17%20passing-brightgreen) ![license: MIT](https://img.shields.io/badge/license-MIT-blue)
 
 **Your files may reveal more than you think.** BeforeShare scans a file for hidden data before you send or publish it, lets you choose what to remove, writes a safe copy, and then **scans the copy again** to check the removal worked. Your original file is never changed.
 
@@ -19,7 +19,7 @@ Runs fully offline. No AI model, no cloud: every check is a plain rule you can r
 ## Install
 
 ```bash
-git clone https://github.com/mohamed-elshamy-ai/beforeshare
+git clone https://github.com/Hamasa-ElShamy/beforeshare
 cd beforeshare
 pip install -e .
 ```
@@ -59,12 +59,12 @@ Exit codes: `scan` returns 1 if a HIGH item is found (useful in scripts), 0 othe
 Needs Python 3.9 or newer. On Windows install it from python.org and tick "Add python.exe to PATH".
 
 ```bash
-# Windows (PowerShell):  py -m pip install git+https://github.com/mohamed-elshamy-ai/beforeshare
-# macOS:                 python3 -m pip install git+https://github.com/mohamed-elshamy-ai/beforeshare
-# Linux:                 python3 -m pip install --user git+https://github.com/mohamed-elshamy-ai/beforeshare
+# Windows (PowerShell):  py -m pip install git+https://github.com/Hamasa-ElShamy/beforeshare
+# macOS:                 python3 -m pip install git+https://github.com/Hamasa-ElShamy/beforeshare
+# Linux:                 python3 -m pip install --user git+https://github.com/Hamasa-ElShamy/beforeshare
 ```
 
-Tested on Linux only. Android: no app; Termux is untested. Technical notes (architecture, algorithms, testing): [ARCHITECTURE.md](ARCHITECTURE.md). Website: https://mohamed-elshamy-ai.github.io/beforeshare/
+Tested on Linux only. Android: no app; Termux is untested. Technical notes (architecture, algorithms, testing): [ARCHITECTURE.md](ARCHITECTURE.md). Website: https://hamasa-elshamy.github.io/beforeshare/
 
 ## Worked examples
 
