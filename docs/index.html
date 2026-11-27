@@ -24,7 +24,7 @@ footer img{border-radius:50%;border:2px solid var(--line);display:block;margin:0
 .badge{display:inline-block;font-size:.72rem;padding:2px 9px;border-radius:99px;border:1px solid var(--line);color:var(--mut);margin-left:6px;vertical-align:middle}
 .ok{color:#2e9e5b}.no{color:#c0392b}
 
-:root{--bg:#07110d;--fg:#d7f5e3;--mut:#7fa592;--card:#0d1c15;--line:#1d3a2c;--acc:#2ee59d;--accfg:#04150d;--code:#030a07;--codefg:#b8f7d4;--warn:#e5b02e;--arabic:'IBM Plex Sans Arabic',sans-serif;--r:4px;--body:'Space Grotesk','IBM Plex Sans Arabic',system-ui,sans-serif;--head:'JetBrains Mono','IBM Plex Sans Arabic',system-ui,sans-serif}
+:root{--bg:#f1f7f3;--fg:#0e2218;--mut:#46604f;--card:#ffffff;--line:#c6dccf;--acc:#0a7a4b;--accfg:#ffffff;--code:#0e2218;--codefg:#c9f7de;--warn:#b45309;--arabic:'IBM Plex Sans Arabic',sans-serif;--r:4px;--body:'Space Grotesk','IBM Plex Sans Arabic',system-ui,sans-serif;--head:'JetBrains Mono','IBM Plex Sans Arabic',system-ui,sans-serif}
 header.hero{padding:70px 0 40px;border-bottom:1px solid var(--line);background:repeating-linear-gradient(0deg,#0a1a13 0 2px,transparent 2px 4px)}
 h1{font-family:var(--head);font-size:clamp(2rem,8vw,2.8rem);overflow-wrap:break-word;margin:0 0 8px}h1:before{content:"> ";color:var(--acc)}.tag{color:var(--mut);font-size:1.1rem;max-width:620px}
 .hero .wrap{text-align:left}
@@ -79,7 +79,7 @@ footer a{display:inline-block;padding:14px 4px;min-height:44px;box-sizing:border
 pre,code,.err,.q,.finder,.results,.redcard,.scan,.stack,.proof,.os pre{direction:ltr;text-align:left;unicode-bidi:isolate}
 pre,code,.err,.q{font-family:ui-monospace,Menlo,Consolas,monospace}
 html[dir=rtl] .q{font-family:var(--body)}
-.ok b{color:#4fd18b}.no b{color:#ff8f7e}
+.ok b{color:#17703f}.no b{color:#a8281b}
 html[dir=rtl] #install,html[dir=rtl] #install .card{direction:ltr;text-align:left}
 html[dir=rtl] *{letter-spacing:0!important;text-transform:none!important}
 
@@ -134,6 +134,22 @@ header.hero{background:radial-gradient(700px 360px at 85% 30%,rgba(46,229,157,.1
 .hero .wrap>div:first-child>*{animation:rise var(--dur-s) var(--ease-out) both}
 @media (max-width:860px){.hero .wrap{grid-template-columns:1fr;gap:30px}}
 @media (prefers-reduced-motion:reduce){.beam{display:none}.find{opacity:1;transform:none}.rowx.hid i{background:repeating-linear-gradient(45deg,rgba(229,176,46,.35) 0 6px,rgba(229,176,46,.12) 6px 12px)}}
+
+/* light conversion: scanner on paper */
+header.hero{background:radial-gradient(700px 360px at 85% 30%,rgba(10,122,75,.10),transparent 70%),repeating-linear-gradient(0deg,rgba(10,122,75,.05) 0 1px,transparent 1px 4px),var(--bg)!important;border-bottom:1px solid var(--line)}
+.hero .tag{color:#2f4a3b!important}
+.scan{background:#fff!important;border:1px solid var(--acc)!important;box-shadow:0 22px 40px -22px rgba(10,122,75,.55)!important}
+.scan .bar{color:var(--mut)!important;border-bottom-color:var(--line)!important}
+.rowx{color:var(--mut)!important}
+.rowx i{background:#dfeae3!important}
+.rowx.hid i{background:repeating-linear-gradient(45deg,#dfeae3 0 6px,#eef5f1 6px 12px)!important;outline:1px dashed #b4cdbf!important}
+.rowx.hid.lit i{background:repeating-linear-gradient(45deg,rgba(180,83,9,.38) 0 6px,rgba(180,83,9,.14) 6px 12px)!important;outline-color:var(--warn)!important}
+.finds{border-top-color:var(--line)!important}
+.find{color:var(--fg)}
+.find em{color:#fff!important;background:var(--warn)!important}
+.find em.m{background:#46604f!important}
+.beam{box-shadow:0 0 14px 3px rgba(10,122,75,.35)!important}
+@media (prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
 </style></head><body>
 <header class="hero"><div class="wrap"><div><p class="eyebrow">Pre-share file check</p><h1>Your files may reveal <b>more than you think.</b></h1><p class="tag">BeforeShare finds hidden sheets, comments, tracked changes, white text and GPS in a file before you send it, writes a safe copy, and scans the copy again to prove it worked.</p>
 <a class="btn" href="https://github.com/mohamed-elshamy-ai/beforeshare">View on GitHub</a><a class="btn alt" href="#install">Install</a>
