@@ -1,6 +1,6 @@
 # BeforeShare
 
-[![tests](https://github.com/mohamed-elshamy-ai/beforeshare/actions/workflows/tests.yml/badge.svg)](https://github.com/mohamed-elshamy-ai/beforeshare/actions/workflows/tests.yml) ![tests: 15 passing](https://img.shields.io/badge/tests-15%20passing-brightgreen) ![license: MIT](https://img.shields.io/badge/license-MIT-blue)
+[![tests](https://github.com/mohamed-elshamy-ai/beforeshare/actions/workflows/tests.yml/badge.svg)](https://github.com/mohamed-elshamy-ai/beforeshare/actions/workflows/tests.yml) ![tests: 17 passing](https://img.shields.io/badge/tests-17%20passing-brightgreen) ![license: MIT](https://img.shields.io/badge/license-MIT-blue)
 
 **Your files may reveal more than you think.** BeforeShare scans a file for hidden data before you send or publish it, lets you choose what to remove, writes a safe copy, and then **scans the copy again** to check the removal worked. Your original file is never changed.
 
