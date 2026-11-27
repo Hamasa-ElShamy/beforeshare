@@ -152,7 +152,7 @@ header.hero{background:radial-gradient(700px 360px at 85% 30%,rgba(10,122,75,.10
 @media (prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
 </style></head><body>
 <header class="hero"><div class="wrap"><div><p class="eyebrow" data-ar="فحص الملف قبل المشاركة">Pre-share file check</p><h1 data-ar="ملفاتك ممكن تكشف &lt;b&gt;أكتر مما تتخيل.&lt;/b&gt;">Your files may reveal <b>more than you think.</b></h1><p class="tag" data-ar="BeforeShare بتلاقي الصفحات المخفية والتعليقات والتغييرات المتتبَّعة والنص الأبيض وبيانات GPS في الملف قبل ما تبعته، وبتكتب نسخة آمنة وبتفحصها تاني تثبت إن التنضيف اشتغل.">BeforeShare finds hidden sheets, comments, tracked changes, white text and GPS in a file before you send it, writes a safe copy, and scans the copy again to prove it worked.</p>
-<a class="btn" data-ar="شوف الكود على GitHub" href="https://github.com/Hamasa-ElShamy/beforeshare">View on GitHub</a><a class="btn alt" data-ar="التثبيت" href="#install">Install</a>
+<a class="btn" data-ar="شوف الكود على GitHub" href="https://github.com/hamasa-lshmn/beforeshare">View on GitHub</a><a class="btn alt" data-ar="التثبيت" href="#install">Install</a>
 <p class="mut" data-ar="مفتوحة المصدر · رخصة MIT · إصدار تجريبي v0.1.0 · بتشتغل بالكامل على جهازك" style="margin-top:16px">Open source · MIT license · early release v0.1.0 · runs fully offline</p></div>
 <aside aria-label="Example scan of Company_Report.xlsx" class="scan"><div class="bar"><span>scan: Company_Report.xlsx</span><span>demo file</span></div>
 <div class="doc"><div aria-hidden="true" class="beam"></div>
@@ -204,15 +204,15 @@ Found:
   [MEDIUM] Document metadata (author=anonymous; creator=ReportLab PDF Library - www.reportlab.com; producer=ReportLab PDF Library - www.reportlab.com)</code></pre><img alt="BeforeShare example output" class="shot" src="gui-clean.png"/></section>
 <section id="install"><h2>Install</h2><div class="os">
 <div class="card"><h3>Windows</h3><div class="mut">Install Python 3.9+ from python.org (tick "Add python.exe to PATH"), then in PowerShell:</div>
-<pre><code>py -m pip install git+https://github.com/Hamasa-ElShamy/beforeshare
+<pre><code>py -m pip install git+https://github.com/hamasa-lshmn/beforeshare
 beforeshare scan yourfile.xlsx
 beforeshare-gui</code></pre><div><span class="mut"><b>Untested.</b></span> Should work (all dependencies publish Windows wheels). Only tested on Linux.</div></div>
 <div class="card"><h3>macOS</h3><div class="mut">Python 3.9+ (<code>brew install python</code> or python.org), then in Terminal:</div>
-<pre><code>python3 -m pip install git+https://github.com/Hamasa-ElShamy/beforeshare
+<pre><code>python3 -m pip install git+https://github.com/hamasa-lshmn/beforeshare
 beforeshare scan yourfile.xlsx
 beforeshare-gui</code></pre><div><span class="mut"><b>Untested.</b></span> Should work. Only tested on Linux.</div></div>
 <div class="card"><h3>Linux</h3><div class="mut">Python 3.9+ is usually installed. In a terminal:</div>
-<pre><code>python3 -m pip install --user git+https://github.com/Hamasa-ElShamy/beforeshare
+<pre><code>python3 -m pip install --user git+https://github.com/hamasa-lshmn/beforeshare
 beforeshare scan yourfile.xlsx
 beforeshare-gui</code></pre><div><span class="ok"><b>Tested.</b></span> Tested on Linux (Python 3.10). The window is tested in Chrome.</div></div>
 <div class="card"><h3>Android</h3><div><span class="mut"><b>Untested.</b></span> No app. Termux (python from pkg) might work for the command line but Pillow/pikepdf may need compiling. Not tested.</div></div>
@@ -221,7 +221,7 @@ beforeshare-gui</code></pre><div><span class="ok"><b>Tested.</b></span> Tested o
 </div><div class="card lang-ar" dir="rtl" lang="ar" style="text-align:start"><b>الشرح بالعربي</b><p>بتفحص الملف قبل ما تبعته وتدورله على حاجات مخفية (شيتات وصفوف مخفية، تعليقات، اسم الكاتب، GPS في الصور). انت بتختار تمسح إيه، والأداة بتعمل نسخة جديدة والأصلي ما بيتغيرش، وبعدين بتفحص النسخة تاني عشان تتأكد إن المسح تم فعلاً. أوفلاين من غير AI.</p></div></section>
 <section><h2 data-ar="حدودها بصراحة">Honest limits</h2><div class="card warn"><ul><li data-ar="النسخة الآمنة مش ضمان. بتشتغل الفحوصات المذكورة بس.">A safe copy is not a guarantee. Only the listed checks run.</li><li data-ar="أنماط النص (إيميلات وكروت وأرقام هوية وأسرار) بتتبلّغ علشان تراجعها، ومش بتتشال.">Text patterns (emails, cards, IDs, secrets) are reported for you to review, not removed.</li><li data-ar="النص المخفي في PDF بيتكشف ومش بيتشال. وPDF الممسوح اللي فيه طبقة OCR بيفعّل التنبيه برضه.">PDF hidden text is detected but not removed. Scanned PDFs with an OCR layer also trigger it.</li><li data-ar="رسوم Excel والجداول المحورية ممكن تضيع في النسخة. صور PowerPoint ورسومه مش بتتفحص.">Excel charts and pivot tables may be lost in the copy. PowerPoint images and charts are not inspected.</li><li data-ar="النافذة متجرَّبة في Chrome على Linux؛ المتصفحات والأنظمة التانية لسه متجرّبتش.">The window is tested in Chrome on Linux; other browsers and systems are untested.</li></ul></div></section>
 </main>
-<footer>Built by <a href="https://github.com/Hamasa-ElShamy">Hamasa El Shamy</a>. Issues and pull requests are welcome on <a href="https://github.com/Hamasa-ElShamy/beforeshare">GitHub</a>.</footer>
+<footer>Built by <a href="https://github.com/hamasa-lshmn">hamasa lshmn</a>. Issues and pull requests are welcome on <a href="https://github.com/hamasa-lshmn/beforeshare">GitHub</a>.</footer>
 <script>
 (function(){
  var KEY='site-lang';
